@@ -1,0 +1,215 @@
+-- // GUI TO LUA \\ --
+
+-- // INSTANCES: 14 | SCRIPTS: 3 | MODULES: 0 \\ --
+
+local UI = {}
+
+-- // StarterGui.ScreenGui \\ --
+UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+
+
+-- // StarterGui.ScreenGui.Frame \\ --
+UI["2"] = Instance.new("Frame", UI["1"])
+UI["2"]["BorderSizePixel"] = 0
+UI["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["2"]["Size"] = UDim2.new(0, 281, 0, 129)
+UI["2"]["Position"] = UDim2.new(0.34447, 0, 0.36061, 0)
+UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+
+-- // StarterGui.ScreenGui.Frame.UICorner \\ --
+UI["3"] = Instance.new("UICorner", UI["2"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextLabel \\ --
+UI["4"] = Instance.new("TextLabel", UI["2"])
+UI["4"]["BorderSizePixel"] = 0
+UI["4"]["BackgroundColor3"] = Color3.fromRGB(255, 0, 5)
+UI["4"]["TextSize"] = 30
+UI["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/Bangers.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["4"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["4"]["Size"] = UDim2.new(0, 281, 0, 43)
+UI["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["4"]["Text"] = [[Music Player GUI Beta]]
+
+-- // StarterGui.ScreenGui.Frame.TextLabel.UICorner \\ --
+UI["5"] = Instance.new("UICorner", UI["4"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextButton \\ --
+UI["6"] = Instance.new("TextButton", UI["2"])
+UI["6"]["BorderSizePixel"] = 0
+UI["6"]["TextSize"] = 30
+UI["6"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["6"]["BackgroundColor3"] = Color3.fromRGB(0, 255, 61)
+UI["6"]["FontFace"] = Font.new([[rbxasset://fonts/families/Bangers.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["6"]["Size"] = UDim2.new(0, 108, 0, 35)
+UI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["6"]["Text"] = [[Play]]
+UI["6"]["Position"] = UDim2.new(0.07117, 0, 0.41667, 0)
+
+-- // StarterGui.ScreenGui.Frame.TextButton.UICorner \\ --
+UI["7"] = Instance.new("UICorner", UI["6"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextButton.LocalScript \\ --
+UI["8"] = Instance.new("LocalScript", UI["6"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextButton \\ --
+UI["9"] = Instance.new("TextButton", UI["2"])
+UI["9"]["BorderSizePixel"] = 0
+UI["9"]["TextSize"] = 30
+UI["9"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["9"]["BackgroundColor3"] = Color3.fromRGB(255, 0, 5)
+UI["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/Bangers.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["9"]["Size"] = UDim2.new(0, 108, 0, 35)
+UI["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["9"]["Text"] = [[Stop]]
+UI["9"]["Position"] = UDim2.new(0.55872, 0, 0.41667, 0)
+
+-- // StarterGui.ScreenGui.Frame.TextButton.UICorner \\ --
+UI["a"] = Instance.new("UICorner", UI["9"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextButton.LocalScript \\ --
+UI["b"] = Instance.new("LocalScript", UI["9"])
+
+
+-- // StarterGui.ScreenGui.Frame.LocalScript \\ --
+UI["c"] = Instance.new("LocalScript", UI["2"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextBox \\ --
+UI["d"] = Instance.new("TextBox", UI["2"])
+UI["d"]["CursorPosition"] = -1
+UI["d"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["d"]["BorderSizePixel"] = 0
+UI["d"]["TextSize"] = 14
+UI["d"]["BackgroundColor3"] = Color3.fromRGB(0, 5, 255)
+UI["d"]["FontFace"] = Font.new([[rbxasset://fonts/families/FredokaOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["d"]["Size"] = UDim2.new(0, 281, 0, 28)
+UI["d"]["Position"] = UDim2.new(0, 0, 0.78295, 0)
+UI["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["d"]["Text"] = [[	
+9044565954]]
+
+-- // StarterGui.ScreenGui.Frame.TextBox.UICorner \\ --
+UI["e"] = Instance.new("UICorner", UI["d"])
+
+
+-- // StarterGui.ScreenGui.Frame.TextButton.LocalScript \\ --
+local function SCRIPT_8()
+local script = UI["8"]
+	-- References to the button and textbox
+	local button = script.Parent -- The script's parent should be the button
+	local textbox = button.Parent:WaitForChild("TextBox") -- Assuming TextBox is a sibling of the button
+	
+	-- Function to play the sound specified in the textbox
+	local function playSound()
+		local soundId = textbox.Text
+		if soundId and soundId ~= "" then
+			local sound = Instance.new("Sound")
+			sound.SoundId = "rbxassetid://" .. soundId
+			sound.Parent = button
+			sound:Play()
+		else
+			print("Please enter a valid SoundId")
+		end
+	end
+	
+	-- Connect the function to the button's MouseButton1Click event
+	button.MouseButton1Click:Connect(playSound)
+	
+end
+task.spawn(SCRIPT_8)
+-- // StarterGui.ScreenGui.Frame.TextButton.LocalScript \\ --
+local function SCRIPT_b()
+local script = UI["b"]
+	-- Place this script in the LocalScript of the button
+	
+	-- References to the button
+	local button = script.Parent -- The script's parent should be the button
+	
+	-- Function to stop all sounds in a given container
+	local function stopAllSoundsInContainer(container)
+		for _, descendant in ipairs(container:GetDescendants()) do
+			if descendant:IsA("Sound") then
+				descendant:Stop()
+			end
+		end
+	end
+	
+	-- Function to stop all sounds in the game
+	local function stopAllSounds()
+		local containers = {game.Workspace, game.StarterGui, game.ReplicatedStorage, game.Players, game.Lighting, game.SoundService}
+	
+		for _, container in ipairs(containers) do
+			stopAllSoundsInContainer(container)
+		end
+	end
+	
+	-- Connect the function to the button's MouseButton1Click event
+	button.MouseButton1Click:Connect(stopAllSounds)
+	
+end
+task.spawn(SCRIPT_b)
+-- // StarterGui.ScreenGui.Frame.LocalScript \\ --
+local function SCRIPT_c()
+local script = UI["c"]
+	--// Services
+	local Players = game:GetService('Players')
+	local UIS = game:GetService("UserInputService")
+	
+	--// Variables
+	local UI = script.Parent
+	
+	local Player = Players.LocalPlayer
+	local Mouse = Player:GetMouse()
+	
+	local Hovered = false
+	local Holding = false
+	local MoveCon = nil
+	
+	local InitialX, InitialY, UIInitialPos
+	
+	--// Functions
+	
+	local function Drag()
+		if Holding == false then MoveCon:Disconnect(); return end
+		local distanceMovedX = InitialX - Mouse.X
+		local distanceMovedY = InitialY - Mouse.Y
+	
+		UI.Position = UIInitialPos - UDim2.new(0, distanceMovedX, 0, distanceMovedY)
+	end
+	
+	--// Connections
+	
+	UI.MouseEnter:Connect(function()
+		Hovered = true
+	end)
+	
+	UI.MouseLeave:Connect(function()
+		Hovered = false
+	end)
+	
+	UIS.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			Holding = Hovered
+			if Holding then
+				InitialX, InitialY = Mouse.X, Mouse.Y
+				UIInitialPos = UI.Position
+	
+				MoveCon = Mouse.Move:Connect(Drag)
+			end
+		end
+	end)
+	
+	UIS.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			Holding = false
+		end
+	end)
+end
+task.spawn(SCRIPT_c)
+
+return UI["1"], require;
